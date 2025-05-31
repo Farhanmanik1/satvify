@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Satvify - Healthy Vegetarian Cloud Kitchen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #fffaf0;
+      color: #2f3e2f;
+      scroll-behavior: smooth;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #3a8555;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+      display: flex;
+      justify-content: center;
+      padding: 0.75rem 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; 
+    }
+    nav::-webkit-scrollbar {
+      display: none; 
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      white-space: nowrap;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    nav li a {
+      font-weight: 600;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #ebf4ea;
+      position: relative;
+      padding: 8px 12px;
+      transition: color 0.3s ease;
+      white-space: nowrap;
+      display: inline-block;
+    }
+    nav li a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: #a6cca3;
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+    nav li a:hover,
+    nav li a:focus {
+      color: #c5e1a5;
+      outline: none;
+    }
+    nav li a:hover::after, nav li a:focus::after {
+      width: 100%;
+    }
+    main.container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1rem 3rem;
+      flex-grow: 1;
+    }
+    header.hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 90vh;
+      text-align: center;
+      padding: 0 1rem;
+      gap: 20px;
+      background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80') center/cover no-repeat;
+      color: white;
+      position: relative;
+    }
+    header.hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(58, 133, 85, 0.6);
+      z-index: 0;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      letter-spacing: 0.18em;
+      font-weight: 700;
+      user-select: none;
+      position: relative;
+      z-index: 1;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.4);
+      display: flex;
+      justify-content: center;
+      gap: 0.1em;
+    }
+    .logo span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(-50px);
+      animation-fill-mode: forwards;
+      animation-name: flyin;
+      animation-duration: 0.6s;
+      animation-timing-function: ease-out;
+    }
+    .logo span:nth-child(1) { animation-delay: 0.1s; }
+    .logo span:nth-child(2) { animation-delay: 0.2s; }
+    .logo span:nth-child(3) { animation-delay: 0.3s; }
+    .logo span:nth-child(4) { animation-delay: 0.4s; }
+    .logo span:nth-child(5) { animation-delay: 0.5s; }
+    .logo span:nth-child(6) { animation-delay: 0.6s; }
+    .logo span:nth-child(7) { animation-delay: 0.7s; }
+
+    @keyframes flyin {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .tagline {
+      font-size: 1.6rem;
+      max-width: 480px;
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+      line-height: 1.3;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.3);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #a6cca3 0%, #3a8555 100%);
+      color: white;
+      border: none;
+      border-radius: 28px;
+      padding: 14px 48px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 15px rgb(58 133 85 / 0.7);
+      transition: box-shadow 0.3s ease, background 0.3s ease;
+      user-select: none;
+      position: relative;
+      z-index: 1;
+    }
+    .btn-primary:hover, .btn-primary:focus {
+      background: linear-gradient(135deg, #88b071 0%, #2d5d33 100%);
+      box-shadow: 0 12px 20px rgb(37 74 37 / 0.9);
+      outline: none;
+    }
+    section {
+      background: #f9fbf7;
+      border-radius: 20px;
+      padding: 2rem 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 16px 28px rgb(77 122 77 / 0.10);
+      color: #2f3e2f;
+      transition: transform 0.3s ease;
+    }
+    section:hover {
+      transform: translateY(8px);
+      box-shadow: 0 20px 35px rgb(77 122 77 / 0.15);
+    }
+    section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: #3a8555;
+      border-left: 8px solid #8fc57b;
+      padding-left: 12px;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+    section p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+    ul {
+      padding-left: 2rem;
+      list-style-type: disc;
+      margin-top: 0;
+    }
+    ul li {
+      margin-bottom: 0.65rem;
+      font-weight: 600;
+      color: #466b33;
+      line-height: 1.4;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 480px;
+      margin: auto;
+    }
+    input, textarea {
+      padding: 14px 18px;
+      font-size: 1rem;
+      border: 2px solid #a2c993;
+      border-radius: 10px;
+      font-weight: 500;
+      font-family: 'Poppins', sans-serif;
+      resize: vertical;
+      transition: border-color 0.3s ease;
+    }
+    input:focus, textarea:focus {
+      border-color: #3a8555;
+      outline: none;
+      background: #e6fae7;
+    }
+    button[type="submit"] {
+      background: #3a8555;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      border-radius: 28px;
+      padding: 14px;
+      font-size: 1.15rem;
+      transition: background 0.3s ease;
+      box-shadow: 0 8px 15px rgb(58 133 85 / 0.5);
+      user-select: none;
+    }
+    button[type="submit"]:hover, button[type="submit"]:focus {
+      background: #295f33;
+      outline: none;
+      box-shadow: 0 12px 20px rgb(37 74 37 / 0.8);
+    }
+    footer {
+      background: #3a8555;
+      color: #ebf4ea;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+      box-shadow: 0 -3px 8px rgb(0 0 0 / 0.15);
+      user-select: none;
+      margin-top: auto;
+    }
+    footer p {
+      margin: 0.3rem 0;
+    }
+    footer .footer-about {
+      max-width: 960px;
+      margin: 0 auto 0.8rem;
+      font-size: 1rem;
+      line-height: 1.4;
+      color: #d1e3d1;
+    }
+    @media (max-width: 640px) {
+      nav ul {
+        gap: 1rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      nav li a {
+        font-size: 0.8rem;
+        padding: 6px 8px;
+      }
+      .logo {
+        font-size: 3.6rem;
+      }
+      .tagline {
+        font-size: 1.3rem;
+        max-width: 90vw;
+      }
+      section {
+        padding: 1.5rem 1.5rem;
+      }
+      section h2 {
+        font-size: 2rem;
+      }
+      form {
+        max-width: 100%;
+      }
+      footer .footer-about {
+        font-size: 0.9rem;
+        padding: 0 1rem;
+      }
+      .logo span {
+        letter-spacing: 0.02em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav aria-label="Primary Navigation">
+    <ul>
+      <li><a href="#about-us">About Us</a></li>
+      <li><a href="#food-philosophy">Our Food Philosophy</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero" role="banner">
+    <div class="logo" aria-label="Satvify logo">
+      <span>S</span><span>a</span><span>t</span><span>v</span><span>i</span><span>f</span><span>y</span>
+    </div>
+    <div class="tagline">Savor the Goodness of Life - Healthy, Satvic & Plant-Based Food Delivered</div>
+    <a href="#contact" class="btn-primary" role="button" aria-label="Order Now">Order Now</a>
+  </header>
+
+  <main class="container" role="main">
+    <section id="about-us" tabindex="-1" aria-labelledby="about-us-title">
+      <h2 id="about-us-title">About Us</h2>
+      <p>Welcome to Satvify!</p>
+      <p>Do you have a passion for healthy living or vegan cuisine? If so, you're in the right place! At Satvify, we're not just about serving food; we're crafting a lifestyle revolution.</p>
+      <p>Derived from the Sanskrit word "Satv," meaning purity and goodness, and "fy," representing satisfaction and fulfillment, Satvify embodies our commitment to satisfying hunger, nourishing the body, and nurturing the soul with Satvic food.</p>
+      <p><strong>What we do:</strong></p>
+      <p>We believe in the power of living, wholesome, plant-based, and water-rich Satvic meals to transform lives. Our aim is simple yet profound: to make healthy eating deliciously irresistible and accessible.</p>
+      <p>From our kitchen to your table, we're dedicated to providing satvic meals that not only tantalize your taste buds but also help you heal your body and mind. Every dish we create is a celebration of nature's bounty, carefully crafted to bring joy and vitality to your day.</p>
+      <p>Join us on this journey toward vibrant health and well-being, one delicious bite at a time.</p>
+      <p>Together, let's savor the goodness of life and embrace the Satvic lifestyle!</p>
+      <p><strong>VISION:</strong></p>
+      <p>We envision a world inspired and nurtured by Satvic principles and the healing power of nature, guiding a plant-based lifestyle that promotes holistic well-being, sustainability, and compassionate living.</p>
+      <p><strong>MISSION:</strong></p>
+      <p>Our mission is to make life-transforming, plant-based Satvic food accessible to all, crafted by nature to nourish the body, delight the senses, suit our modern lifestyles, and nurture the soul.</p>
+      <p><strong>VALUE STATEMENT:</strong></p>
+      <ul>
+        <li><strong>Living:</strong> We promote a lifestyle that enhances vitality and energy through fresh, living foods free from artificial additives and preservatives to ensure the highest quality in every meal.</li>
+        <li><strong>Wholesome:</strong> We use minimally processed ingredients (in their most natural form) in our wholesome meals containing jaggery over white sugar, brown rice over white rice, whole grains over refined flours, and wholesome fats like coconut, sesame, peanuts, etc, over oils.</li>
+        <li><strong>Plant-Based (Vegan):</strong> Whether you are a seasoned vegan or new to plant-based eating, we welcome and support you on your journey toward a healthier and compassionate lifestyle that is respectful of all living beings.</li>
+        <li><strong>Water-Rich:</strong> Our dishes emphasize fresh water-rich ingredients like juicy fruits and vegetables, helping to keep the body hydrated and aiding digestion.</li>
+        <li><strong>Sustainability:</strong> We are dedicated to sustainable sourcing, minimal waste, and environment-friendly packaging to reduce our ecological footprint. By promoting plant-based eating, we aim to contribute to the health of our planet through reduced resource consumption and lower carbon emissions.</li>
+        <li><strong>Spirituality:</strong> We encourage a mindful approach to eating involving plant-based and non-stimulating meals (avoiding stimulants like onion, garlic, mushrooms, tea, and coffee) that promote mental clarity, emotional balance, and inner peace, fostering a deeper connection with oneself and the surrounding world.</li>
+      </ul>
+      <p>Through these values, Satvify strives to create a community centered on the joys of healthy, conscious living and the profound benefits of a Satvic lifestyle.</p>
+    </section>
+
+    <section id="food-philosophy" tabindex="-1" aria-labelledby="food-philosophy-title">
+      <h2 id="food-philosophy-title">Our Food Philosophy</h2>
+      <p>We believe in the power of living, wholesome, plant-based, and water-rich Satvic meals to transform lives. Our aim is simple yet profound: to make healthy eating deliciously irresistible and accessible.</p>
+      <p>From the freshest ingredients to mindful cooking techniques, every dish embodies nourishment for the body and soul.</p>
+    </section>
+
+    <section id="contact" tabindex="-1" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact Form</h2>
+      <form id="contact-form" novalidate>
+        <input type="text" id="name" name="name" placeholder="Your name" required aria-required="true" aria-label="Your name" />
+        <input type="email" id="email" name="email" placeholder="Your email" required aria-required="true" aria-label="Your email" />
+        <textarea id="message" name="message" rows="5" placeholder="Your message" required aria-required="true" aria-label="Your message"></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="footer-about">
+    </div>
+    <p>&copy; 2025 Satvify. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const message = form.message.value.trim();
+      const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+
+      if (!name || !email || !message) {
+        alert('Please fill in all fields.');
+        return;
+      }
+      if (!emailPattern.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      alert('Thank you for reaching out to Satvify. We will get back to you soon!');
+      form.reset();
+    });
+  </script>
+</body>
+</html>

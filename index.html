@@ -403,3 +403,42 @@
 
     <section id="contact" tabindex="-1" aria-labelledby="contact-title">
       <h2 id="contact-title">Contact Form</h2>
+      <form id="contact-form" novalidate>
+        <input type="text" id="name" name="name" placeholder="Your name" required aria-required="true" aria-label="Your name" />
+        <input type="email" id="email" name="email" placeholder="Your email" required aria-required="true" aria-label="Your email" />
+        <textarea id="message" name="message" rows="5" placeholder="Your message" required aria-required="true" aria-label="Your message"></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="footer-about">
+    </div>
+    <p>&copy; 2025 Satvify. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const message = form.message.value.trim();
+      const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+
+      if (!name || !email || !message) {
+        alert('Please fill in all fields.');
+        return;
+      }
+      if (!emailPattern.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      alert('Thank you for reaching out to Satvify. We will get back to you soon!');
+      form.reset();
+    });
+  </script>
+</body>
+</html>

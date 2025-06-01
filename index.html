@@ -340,6 +340,22 @@
         padding: 0 1rem;
       }
     }
+       .logo-image {
+  max-width: 150px; /* Maximum width for larger screens */
+  width: 100%;      /* Responsive width */
+  height: auto;     /* Maintain aspect ratio */
+  margin-bottom: -3rem;
+  user-select: none;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+    transition: transform 0.3s ease;
+}
+
+@media (max-width: 640px) {
+  .logo-image {
+    max-width: 120px; /* Smaller max width for mobile */
+    margin-bottom: -3rem;
+  }
+}
   </style>
 </head>
 <body>
@@ -353,6 +369,7 @@
 
   <header class="hero" role="banner">
     <div class="logo" aria-label="Satvify logo">
+      <img src="b.png" alt="Satvify Logo" class="logo-image" />
       <span>S</span><span>a</span><span>t</span><span>v</span><span>i</span><span>f</span><span>y</span>
     </div>
     <div class="tagline">Savor the Goodness of Life - Healthy, Satvic & Plant-Based Food Delivered</div>

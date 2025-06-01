@@ -349,25 +349,6 @@
       filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
       transition: transform 0.3s ease;
     }
-
-    @media (max-width: 640px) {
-      .logo-image {
-        max-width: 90px; /* Smaller max width for mobile */
-        margin-bottom: -3rem;
-      }
-      .logo span {
-        display: inline-block;
-        opacity: 0;
-        transform: translateY(-50px);
-        animation-fill-mode: forwards;
-        animation-name: flyin;
-        animation-duration: 0.6s;
-        animation-timing-function: ease-out;
-        backface-visibility: hidden;
-        transform-style: preserve-3d;
-        will-change: transform, opacity;
-      }
-    }
   </style>
 </head>
 <body>

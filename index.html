@@ -113,11 +113,6 @@
       background: rgba(58, 133, 85, 0.6);
       z-index: 0;
     }
-    .logo-container {
-      display: flex;
-      flex-direction: column; /* Stack logo and text vertically */
-      align-items: center; /* Center logo and text */
-    }
     .logo {
       font-family: 'Playfair Display', serif;
       font-size: 4.5rem;
@@ -155,50 +150,38 @@
       }
     }
 
-    .logo-image {
-      max-width: 100px; /* Maximum width for larger screens */
-      width: 100%;      /* Responsive width */
-      height: auto;     /* Maintain aspect ratio */
-      margin-bottom: -1rem;
-      user-select: none;
-      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
-      transition: transform 0.3s ease;
+    .tagline {
+      font-size: 1.6rem;
+      max-width: 480px;
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+      line-height: 1.3;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.3);
+      word-break: break-word;
     }
-
-    @media (max-width: 640px) {
-      .logo-image {
-        max-width: 90px; /* Smaller max width for mobile */
-        margin-bottom: -3rem;
-      }
-      .logo {
-        font-size: 3.6rem;
-      }
-      .tagline {
-        font-size: 1.3rem;
-        max-width: 90vw;
-      }
-      p {
-        font-size: 0.9rem; /* smaller font size on mobile */
-      }
-      main.container {
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-      section {
-        padding: 1.5rem 1rem;
-        margin-left: 0;
-        margin-right: 0;
-      }
-      section h2 {
-        font-size: 2rem;
-      }
-      form {
-        max-width: 100%;
-      }
-      footer .footer-about {
-        font-size: 0.9rem;
-        padding: 0 1rem;
-      }
+    .btn-primary {
+      background: linear-gradient(135deg, #a6cca3 0%, #3a8555 100%);
+      color: white;
+      border: none;
+      border-radius: 28px;
+      padding: 14px 48px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 15px rgb(58 133 85 / 0.7);
+      transition: box-shadow 0.3s ease, background 0.3s ease;
+      user-select: none;
+      position: relative;
+      z-index: 1;
+      white-space: normal;
+      max-width: 90vw;
+      text-align: center;
+    }
+    .btn-primary:hover, .btn-primary:focus {
+      background: linear-gradient(135deg, #88b071 0%, #2d5d33 100%);
+      box-shadow: 0 12px 20px rgb(37 74 37 / 0.9);
+      outline: none;
     }
     /* Sections */
     section {
@@ -316,6 +299,75 @@
       line-height: 1.4;
       color: #d1e3d1;
     }
+    /* Responsive */
+    @media (max-width: 640px) {
+      nav ul {
+        gap: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+      }
+      nav li a {
+        font-size: 0.75rem;
+        padding: 6px 8px;
+      }
+      .logo {
+        font-size: 3.6rem;
+      }
+      .tagline {
+        font-size: 1.3rem;
+        max-width: 90vw;
+      }
+      p {
+        font-size: 0.9rem; /* smaller font size on mobile */
+      }
+      main.container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      section {
+        padding: 1.5rem 1rem;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      section h2 {
+        font-size: 2rem;
+      }
+      form {
+        max-width: 100%;
+      }
+      footer .footer-about {
+        font-size: 0.9rem;
+        padding: 0 1rem;
+      }
+    }
+    .logo-image {
+      max-width: 100px; /* Maximum width for larger screens */
+      width: 100%;      /* Responsive width */
+      height: auto;     /* Maintain aspect ratio */
+      margin-bottom: -1rem;
+      user-select: none;
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+      transition: transform 0.3s ease;
+    }
+
+    @media (max-width: 640px) {
+      .logo-image {
+        max-width: 90px; /* Smaller max width for mobile */
+        margin-bottom: -3rem;
+      }
+      .logo span {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(-50px);
+        animation-fill-mode: forwards;
+        animation-name: flyin;
+        animation-duration: 0.6s;
+        animation-timing-function: ease-out;
+        backface-visibility: hidden;
+        transform-style: preserve-3d;
+        will-change: transform, opacity;
+      }
+    }
   </style>
 </head>
 <body>
@@ -328,11 +380,9 @@
   </nav>
 
   <header class="hero" role="banner">
-    <div class="logo-container">
+    <div class="logo" aria-label="Satvify logo">
       <img src="images/b.png" alt="Satvify Logo" class="logo-image" />
-      <div class="logo" aria-label="Satvify logo">
-        <span>S</span><span>a</span><span>t</span><span>v</span><span>i</span><span>f</span><span>y</span>
-      </div>
+      <span>S</span><span>a</span><span>t</span><span>v</span><span>i</span><span>f</span><span>y</span>
     </div>
     <div class="tagline">Savor the Goodness of Life - Healthy, Satvic & Plant-Based Food Delivered</div>
     <a href="#contact" class="btn-primary" role="button" aria-label="Order Now">Order Now</a>
@@ -373,34 +423,3 @@
 
     <section id="contact" tabindex="-1" aria-labelledby="contact-title">
       <h2 id="contact-title">Contact Form</h2>
-      <form id="contact-form" novalidate>
-        <input type="text" id="name" name="name" placeholder="Your name" required aria-required="true" aria-label="Your name" />
-        <input type="email" id="email" name="email" placeholder="Your email" required aria-required="true" aria-label="Your email" />
-        <textarea id="message" name="message" rows="5" placeholder="Your message" required aria-required="true" aria-label="Your message"></textarea>
-        <button type="submit">Send Message</button>
-      </form>
-    </section>
-  </main>
-
-  <footer role="contentinfo">
-    <div class="footer-about">
-    </div>
-    <p>&copy; 2025 Satvify. All rights reserved.</p>
-  </footer>
-
-  <script>
-    const form = document.getElementById('contact-form');
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const name = form.name.value.trim();
-      const email = form.email.value.trim();
-      const message = form.message.value.trim();
-      const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
-
-      if (!name || !email || !message) {
-        alert('Please fill in all fields.');
-        return;
-      }
-      if (!emailPattern.test(email)) {
-        alert('Please enter a valid email address.');
-        return;

@@ -192,7 +192,7 @@
 
 .small-image-container {
     position: relative;
-    height: 500px;
+    height: 600px;
     margin-top: 20px;
     display: flex;
     justify-content: center;
@@ -212,7 +212,7 @@
 .small-image-left {
     position: absolute;
     left: 20px;
-    top: 350px;
+    top: 450px;
     max-width: 1120px;
     width: 45vw;
     height: auto;
@@ -267,6 +267,8 @@
         z-index: 10;
         pointer-events: none;
     }
+
+
     .image-paragraph {
         font-size: 1.2rem;
         top: 60%;
@@ -311,7 +313,18 @@
     }
 }
 
-
+  .small-image-right, .small-image-left {
+    position: absolute;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    /* ... other existing styles ... */
+  }
+  /* When in viewport, reveal with animation */
+  .show-on-scroll {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
   #about-us {
     max-width: 900px;
@@ -616,6 +629,30 @@
       readMore.textContent = 'Read Less';
     }
   });
+document.addEventListener('DOMContentLoaded', function() {
+    var images = document.querySelectorAll('.small-image-right, .small-image-left');
+  
+    var observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+  
+    var observer = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show-on-scroll');
+          observer.unobserve(entry.target); // Animate only once
+        }
+      });
+    }, observerOptions);
+  
+    images.forEach(function(img) {
+      observer.observe(img);
+    });
+  });
+
+
 </script>
 </body>
 </html>
